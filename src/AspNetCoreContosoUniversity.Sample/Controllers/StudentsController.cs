@@ -23,7 +23,7 @@ namespace AspNetCoreContosoUniversity.Sample.Controllers
       int? page)
     {
       ViewData["CurrentSort"] = sortOrder;
-      ViewData["NameSortParm"] = sortOrder == "name_asc" ? "name_desc" : "name_asc";
+      ViewData["NameSortParm"] = sortOrder == "name_desc" ? "name_asc" : "name_desc";
       ViewData["DateSortParm"] = sortOrder == "date_asc" ? "date_desc" : "date_asc";
 
       if (searchString != null)
@@ -64,7 +64,10 @@ namespace AspNetCoreContosoUniversity.Sample.Controllers
       }
 
       int pageSize = 3;
-      return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), page ?? 1, pageSize));
+      return View(await PaginatedList<Student>.CreateAsync(
+        students.AsNoTracking(), 
+        page ?? 1, 
+        pageSize));
     }
 
     // GET: Students/Details/5
